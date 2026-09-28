@@ -40,4 +40,9 @@ urlpatterns = [
         "api/road-health/",
         include("dashboard.urls")
     ),
+
+    path(
+        "api/dashboard/",
+        include("dashboard.dashboard_urls")
+    ),
 ]
