@@ -84,6 +84,29 @@ class Maintenance(models.Model):
         blank=True
     )
 
+    verification_status = models.CharField(
+        max_length=20,
+        choices=[
+            ("PENDING", "Pending"),
+            ("PASSED", "Passed"),
+            ("FAILED", "Failed"),
+        ],
+        default="PENDING"
+    )
+
+    is_delayed = models.BooleanField(
+        default=False
+    )
+
+    repeat_defect = models.BooleanField(
+        default=False
+    )
+
+    verification_notes = models.TextField(
+        blank=True
+    )
+
+
     created_at = models.DateTimeField(
         auto_now_add=True
     )
