@@ -26,3 +26,33 @@ class RoadHealthTest(TestCase):
         priority = determine_maintenance_priority(60)
 
         self.assertEqual(priority, "MEDIUM")
+
+    def test_road_health_api_create(self):
+        
+        response = self.client.post(
+            "/api/road-health/",
+            {
+                "road_id": "TEST001",
+                "road_name": "Test Road",
+                "location": "Pune",
+                "defect_count": 3
+            },
+            content_type="application/json"
+        )
+
+        self.assertEqual(response.status_code, 201)
+
+        self.assertEqual(
+            response.data["health_score"],
+            70
+        )
+
+        self.assertEqual(
+            response.data["risk_level"],
+            "MODERATE"
+        )
+
+        self.assertEqual(
+            response.data["maintenance_priority"],
+            "MEDIUM"
+        )
